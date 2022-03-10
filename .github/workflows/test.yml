@@ -14,14 +14,24 @@ jobs:
     - run: |
         npm install
         npm run build
-  test: # make sure the action works on a clean machine without building
+  # test: # make sure the action works on a clean machine without building
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest, macos-latest, windows-latest] 
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: ./
+  #     id: install
+  #   - name: Get the sops version
+  #     run: sops --version
+  test2: # make sure the action works on a clean machine without building
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest] 
     steps:
-    - uses: actions/checkout@v2
-    - uses: ./
+    - uses: mdgreenwald/mozilla-sops-action@v1.1.0
       id: install
     - name: Get the sops version
       run: sops --version
